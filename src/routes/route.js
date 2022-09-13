@@ -1,25 +1,28 @@
 const express = require('express');
 const router = express.Router();
-const authorController=require('../Controller/authorController')
-const blogsController=require('../Controller/blogsController')
-const mid1=require('../MiddleWare/auth')
-// const midEmail=require('../middleWare/validator')
+const authorController = require('../Controller/authorController')
+const blogsController = require('../Controller/blogsController')
+const mid1 = require('../MiddleWare/auth')
 
-router.post('/authors',authorController.createAuthor)
+//============== Create Author API =============================//
+router.post('/authors', authorController.createAuthor)
 
-router.post('/login',authorController.loginAuthor)
+//================== Create Author Login API =====================//
+router.post('/login', authorController.loginAuthor)
 
-router.post('/blogs',mid1.authentication,blogsController.createBlogs)
+//================== Create Blogs API ============================//
+router.post('/blogs', mid1.authentication, blogsController.createBlogs)
 
-router.get('/blogs',mid1.authentication,blogsController.getAllBlogs)
+//================= Get All Blogs API =============================//
+router.get('/blogs', mid1.authentication, blogsController.getAllBlogs)
 
-router.put('/blogs/:blogId',mid1.authentication,mid1.authorization,blogsController.updateBlog)
+//================== Put Blogs API Using BlogID =====================//
+router.put('/blogs/:blogId', mid1.authentication, mid1.authorization, blogsController.updateBlog)
 
-router.delete('/blogs/:blogId',mid1.authentication,mid1.authorization,blogsController.deleteBlog)
+//==================== Delete Blogs API By Path Using BlogID ============//
+router.delete('/blogs/:blogId', mid1.authentication, mid1.authorization, blogsController.deleteBlog)
 
-
-router.delete('/blogs',mid1.authentication,blogsController.deleteByKeys)
-
-
+//=================== Deleted Blogs API By Using Query Params =============//
+router.delete('/blogs', mid1.authentication, blogsController.deleteByKeys)
 
 module.exports = router;
